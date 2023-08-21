@@ -16,7 +16,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function displayAnElement(arr) {
-    //
     contenedor.innerHTML += `<li class="list-group-item">${
       arr[arr.length - 1]
     } </li>`;
