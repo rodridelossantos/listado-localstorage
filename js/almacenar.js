@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let arrayDatos = JSON.parse(localStorage.getItem("datos")) || [];
 
   // Esta función agrega todos los elementos del localStorage al contenedor
-  function addEntireArray(arr) {
+  function displayList(arr) {
     for (let i = 0; i < arr.length; i++) {
       let li = document.createElement("li");
       li.classList.add("list-group-item");
@@ -17,14 +17,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function displayAnElement(arr) {
+  function displayAnElement(str) {
     // Adjunta un elemento al contenedor html
-    contenedor.innerHTML += `<li class="list-group-item">${
-      arr[arr.length - 1]
-    } </li>`;
+    contenedor.innerHTML += `<li class="list-group-item">${str} </li>`;
   }
 
-  addEntireArray(arrayDatos);
+  // Muestra elementos del array en el contenedor ul
+  displayList(arrayDatos);
 
   // Este botón agrega el valor del input al array del localstorage y lo muestra en pantalla.
   btnAgregar.addEventListener("click", () => {
@@ -32,14 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
     if (item.value) {
       arrayDatos.push(item.value);
       localStorage.setItem("datos", JSON.stringify(arrayDatos));
+      displayAnElement(item.value);
       item.value = "";
-      displayAnElement(arrayDatos);
     }
   });
 
   // Quita la lista entera del contenedor al apretar en limpiar
   btnLimpiar.addEventListener("click", () => {
     localStorage.removeItem("datos");
+    arrayDatos = [];
     contenedor.textContent = "";
   });
 });
